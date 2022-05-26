@@ -24,7 +24,7 @@ public class Kata4 {
                 .map(movie -> movie.getVideos())
                 .flatMap(list -> list.stream())
                 .map(movie -> ImmutableMap.of("id", movie.getId(), "title", movie.getTitle(),
-                        "boxart", movie.getBoxarts().stream().map(boxArt -> boxArt.getUrl()).filter(url -> url.contains("150")).collect(Collectors.toList())))
+                        "boxart", new BoxArt(150, 200, movie.getBoxarts().stream().map(boxArt -> boxArt.getUrl()).filter(url -> url.contains("150")).collect(Collectors.toList()).get(0))))
                 .collect(Collectors.toList());
 
         moviesMap.forEach(System.out::println);
