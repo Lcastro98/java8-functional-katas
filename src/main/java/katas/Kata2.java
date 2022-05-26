@@ -21,7 +21,7 @@ public class Kata2 {
         List<Integer> filter = movies.stream()
                 .filter(movie -> movie.getRating() == 5.0D)
                 .map(movie -> movie.getId())
-                .collect(Collectors.toList());
+                .collect(Collectors.toUnmodifiableList());
 
         return filter;
     }

@@ -25,10 +25,11 @@ public class Kata7 {
                 .map(movie -> movie.getVideos())
                 .flatMap(list -> list.stream())
                 .map(movie -> ImmutableMap.of("id", movie.getId(), "title", movie.getTitle(),
-                        "boxart", movie.getBoxarts().stream().reduce((box1, box2) -> box1.getWidth() < box2.getWidth() ? box1 : box2).map(BoxArt::getUrl).get()))
-                .collect(Collectors.toList());
+                        "boxart", movie.getBoxarts().stream().reduce((box1, box2) ->
+                                        box1.getWidth() < box2.getWidth() ? box1 : box2)
+                                .map(BoxArt::getUrl).get()))
+                .collect(Collectors.toUnmodifiableList());
 
         return moviesMap;
-        //ImmutableList.of(ImmutableMap.of("id", 5, "title", "Bad Boys", "boxart", "url"));
     }
 }

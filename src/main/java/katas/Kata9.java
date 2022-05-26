@@ -24,10 +24,10 @@ public class Kata9 {
                 .flatMap(list -> list.stream())
                 .map(movie -> ImmutableMap.of("id", movie.getId(), "title", movie.getTitle(),
                         "time", movie.getInterestingMoments().get(1).getTime(),
-                        "url", movie.getBoxarts().stream().reduce((box1, box2) -> box1.getWidth() < box2.getWidth() ? box1 : box2).map(BoxArt::getUrl).get()))
-                .collect(Collectors.toList());
+                        "url", movie.getBoxarts().stream()
+                                .reduce((box1, box2) -> box1.getWidth() < box2.getWidth() ? box1 : box2).map(BoxArt::getUrl).get()))
+                .collect(Collectors.toUnmodifiableList());
 
         return moviesMap;
-        //ImmutableList.of(ImmutableMap.of("id", 5, "title", "some title", "time", new Date(), "url", "someUrl"));
     }
 }

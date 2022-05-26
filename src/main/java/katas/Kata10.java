@@ -61,16 +61,10 @@ public class Kata10 {
 
         List<Map> data = lists.stream().map(list -> ImmutableMap.of("name", list.get("name"), "videos",
                         videos.stream().filter(video -> video.get("listId").equals(list.get("id")))
-                                .map(video -> ImmutableList.of( ImmutableMap.of("id", video.get("id")), "title", video.get("title")))
+                                .map(video -> ImmutableList.of(ImmutableMap.of("id", video.get("id")), "title", video.get("title")))
                                 .collect(Collectors.toList())))
-                .collect(Collectors.toList());
-
-        data.forEach(System.out::println);
+                .collect(Collectors.toUnmodifiableList());
 
         return data;
-        /*ImmutableList.of(ImmutableMap.of("name", "someName", "videos", ImmutableList.of(
-        ImmutableMap.of("id", 5, "title", "The Chamber"),
-        ImmutableMap.of("id", 3, "title", "Fracture")
-        )));*/
     }
 }

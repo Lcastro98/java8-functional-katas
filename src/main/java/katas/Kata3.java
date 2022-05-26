@@ -22,9 +22,8 @@ public class Kata3 {
                 .map(movie -> movie.getVideos())
                 .flatMap(list -> list.stream())
                 .map(movie -> movie.getId())
-                .collect(Collectors.toList());
+                .collect(Collectors.toUnmodifiableList());
 
         return videos;
-        //ImmutableList.of(1, 2, 3);
     }
 }
