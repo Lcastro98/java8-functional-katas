@@ -59,13 +59,15 @@ public class Kata10 {
         List<Map> lists = DataUtil.getLists();
         List<Map> videos = DataUtil.getVideos();
 
-        List<Map> zip = StreamUtils.zip(stream(lists), stream(videos),
-                        (list, video) -> ImmutableMap.of("name", list.get("name"), "videos", ImmutableList.of( ImmutableMap.of("id", video.get("id"), "title", video.get("title")))))
+        List<Map> data = lists.stream().map(list -> ImmutableMap.of("name", list.get("name"), "videos",
+                        videos.stream().filter(video -> video.get("listId").equals(list.get("id")))
+                                .map(video -> ImmutableList.of( ImmutableMap.of("id", video.get("id")), "title", video.get("title")))
+                                .collect(Collectors.toList())))
                 .collect(Collectors.toList());
 
-        zip.forEach(System.out::println);
+        data.forEach(System.out::println);
 
-        return zip;
+        return data;
         /*ImmutableList.of(ImmutableMap.of("name", "someName", "videos", ImmutableList.of(
         ImmutableMap.of("id", 5, "title", "The Chamber"),
         ImmutableMap.of("id", 3, "title", "Fracture")
